@@ -4,5 +4,20 @@
     <a href="intent://scan/#Intent;scheme=zxing;package=com.google.zxing.client.android;end"> Take a QR code </a>
     </br>
     <a href="upi://pay/#Intent;action=android.intent.action.VIEW">Pay with UPI</a>
+  <script type="text/javascript">
+    if ('getInstalledRelatedApps' in navigator) {
+      navigator.getInstalledRelatedApps()
+        .then(apps => {
+          const upiSupportedApps = apps.filter(app => app.url.startsWith('upi://'));
+            alert("Success");
+            alert(upiSupportedApps);
+        })
+        .catch(error => {
+          alert('Error retrieving installed apps:', error);
+        });
+    } else {
+      alert('getInstalledRelatedApps() is not supported in this browser.');
+    }
+  </script>
   </body> 
 </html>
