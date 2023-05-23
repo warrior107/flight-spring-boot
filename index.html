@@ -4,6 +4,30 @@
     <a href="intent://scan/#Intent;scheme=zxing;package=com.google.zxing.client.android;end"> Take a QR code </a>
     </br>
     <a href="upi://pay/#Intent;action=android.intent.action.VIEW">Pay with UPI</a>
+  <div id="upi"></div>
+
+
+<script type="text/javascript">
+    window.onload = loadUPIHandlers;
+    function loadUPIHandlers() {
+      var a = ApuSDK.upiHandlers();
+      var upiList = a.length == 0 ? [] : a.split(",");
+      var dom = "";
+      if (upiList.length == 0) {
+        dom = '<div class="box">No UPI Apps found on phone.</div>';
+      } else {
+        for (var i = 0; i < upiList.length; i++) {
+          var info = upiList[i].split("|");
+          dom += '<div onClick="openUPI(\'' + info[0] + '\',\'' + info[1] + '\')"><h4><a href="javascript:void(0)">' + info[0] + '</a></h4></div>';
+        }
+      }
+      document.getElementById("upi").innerHTML = dom;
+    }
+
+    function openUPI(package, activity) {
+      ApuSDK.openUPIHandler(package, activity)
+    }
+  </script>
   <script type="text/javascript">
     if ('getInstalledRelatedApps' in navigator) {
       navigator.getInstalledRelatedApps()
