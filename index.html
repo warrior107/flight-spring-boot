@@ -8,7 +8,7 @@
     if ('getInstalledRelatedApps' in navigator) {
       navigator.getInstalledRelatedApps()
         .then(apps => {
-          const upiSupportedApps = apps.filter(app => app.url.startsWith('upi://'));
+          const upiSupportedApps = apps;//.filter(app => app.url.startsWith('upi://'));
             alert("Success");
             alert(upiSupportedApps);
         })
